@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- CSS Link To Main Handlebars -->
+    <link rel="stylesheet" href="../static/css/style.css"/>
+
+    <title>GechilaPY | Login</title>
+</head>
+<body style="height: 100vh;">
+    <nav class="container" style="background-color: transparent">
+        <div class="nav-logo">
+            <a class="logo" href="/">GechilaPY</a>
+        </div>
+        <ul>
+            <li class="nav-links">
+                <a class="nav-link {% if request.endpoint == 'home_page' %} active {%endif%}" aria-current="page" href="{{ url_for('home_page') }}">Home</a>
+            </li>
+            <li class="nav-links">
+                <a class="nav-link" href="{{ url_for('about_page') }}">About Me</a>
+            </li>
+            {% if 'name' in session %}
+            <li class="nav-links">
+                <a class="nav-link" href="{{ url_for('user_logout') }}" >Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-links">
+                <a class="nav-link {% if request.endpoint == 'add_user' %} active {%endif%}" href="{{ url_for('add_user') }}">Registration</a>
+            </li>
+            <li class="nav-links">
+                <a class="nav-link" href="{{ url_for('user_login') }}">Login</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    <form method="POST" style="display: flex; flex-direction: column; justify-content: center; align-items: center; padding-top: 20rem;"> 
+        <h4 style="color: white;" class="center-align auth-form-title">Login Form</h4>
+
+        <div class="input-field col s10 offset-s1" style="display: inline-block;">
+            <input id="email" type="email" name="email" style="color: white;"/>
+            <label for="email">Email</label>
+        </div>
+        <div class="input-field col s10 offset-s1" style="display: inline-block;">
+            <input id="password" type="password" name="password" style="color: white"/>
+            <label for="password">Password</label>
+        </div>
+        <button type="submit" class="btn-large waves-effect waves-light grey darken-3 submit-button">
+            Login
+            <i class="material-icons right"></i>
+        </button>
+        <h5 style="color: white;">Are You Not Registered Yet?</h5>
+        <div class="button">
+            <a href="{{ url_for('add_user') }}">Register Here</a>
+        </div>
+        <h5 style="color: red; background: transparent; padding: 0.7rem 1.5rem; border-radius: 25px;">{{log_in_warning}}</h5>
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

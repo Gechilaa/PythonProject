@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- CSS Link To Main Handlebars -->
+    <link rel="stylesheet" href="../static/css/style.css"/>
+
+    <title>GechilaPY | Registration</title>
+</head>
+<body>
+    <nav class="container" style="background-color: transparent">
+        <div class="nav-logo">
+            <a class="logo" href="/">GechilaPY</a>
+        </div>
+        <ul>
+            <li class="nav-links">
+                <a class="nav-link {% if request.endpoint == 'home_page' %} active {%endif%}" aria-current="page" href="{{ url_for('home_page') }}">Home</a>
+            </li>
+            <li class="nav-links">
+                <a class="nav-link" href="{{ url_for('about_page') }}">About Me</a>
+            </li>
+            {% if 'name' in session %}
+            <li class="nav-links">
+                <a class="nav-link" href="{{ url_for('user_logout') }}" >Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-links">
+                <a class="nav-link {% if request.endpoint == 'add_user' %} active {%endif%}" href="{{ url_for('add_user') }}">Registration</a>
+            </li>
+            <li class="nav-links">
+                <a class="nav-link" href="{{ url_for('user_login') }}">Login</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <div class="container text-center" style="padding-top: 10rem;">
+        <h4 class="registration-h4 center-align auth-form-title" style="color: white;">Registration Form</h4> 
+        <form method="POST">
+            <input class="contact-form-text" type="text" name="name" placeholder="Enter Your First Name">
+
+            <input class="contact-form-text" type="text" name="last_name" placeholder="Enter Your Last Name">
+
+            <input class="datepicker contact-form-text" type="text" name="birth_date" placeholder="Enter Your Birth Date">
+        
+            <input class="contact-form-text" type="text" name="phone" placeholder="Enter Your Phone Number">
+
+            <input class="contact-form-text" type="email" name="email" placeholder="Enter Your Email Address">
+                
+            <input class="contact-form-text" type="password" name="password" placeholder="Enter Your Password" minlength="8">
+        
+            <button type="submit" class="btn-large waves-effect waves-light grey darken-3 submit-button">Registration
+                <i class="material-icons right"></i>
+            </button>
+        </form>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>
